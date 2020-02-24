@@ -1,26 +1,24 @@
 import React from 'react';
+import { useDrag } from 'react-dnd';
 import ItemTypes from './ItemTypes';
-import { DragSource } from 'react-dnd';
 
-const Rect = ({ isDragging, connectDragSource })=>{
-    const opacity = isDragging? 0.4: 1;
-    return connectDragSource(
-    <div style={{width: '200px', height: '200px', backgroundColor: 'red', opacity}}>
-  
-    </div>
-    );
-  }
-
-export default DragSource(
-    ItemTypes.RECT, {
-        beginDrag: (props)=>({name: props.name}),
-        endDrag(props, monitor){
-            const item = monitor.getItem();
+const Rect = ({ name })=>{
+    const [{ isDragging }, drag] = useDrag({
+        item: { name, type: ItemTypes.RECT },
+        end: (item, monitor)=>{
             const dropResult = monitor.getDropResult();
-        }
-    },
-    (connect, monitor)=>({
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
-    }),
-)(Rect);
+        },
+        collect: monitor => ({
+            isDragging: monitor.isDragging(),
+        }),
+    });
+
+    const opacity = isDragging? 0.4 : 1;
+    return(
+        <div style={{width: '100px', height: '100px', backgroundColor: 'red'}} ref={drag}>
+            {name}
+        </div>
+    )
+}
+
+export default Rect;
