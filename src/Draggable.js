@@ -22,12 +22,13 @@ const Rect = ({ name })=>{
         borderRadius: '50%',
         backgroundColor: 'red',
         opacity,
+        backgroundImage: `url('${window.location.origin}/logo${name}.png')`,
+        backgroundSize: '100px 100px',
         display: 'flex',
         justifyContent: "center",
         alignItems: 'center'
       }}
         ref={drag}>
-      {name}
     </div>
   );
 }

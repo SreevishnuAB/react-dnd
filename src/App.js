@@ -39,8 +39,8 @@ function App() {
 
         </div>
         <div style={{display: 'flex', justifyContent: 'center'}}>
-          <Rect name="Rect1"/>
-          <Rect name="Rect2"/>
+          <Rect name="192"/>
+          <Rect name="512"/>
         </div>
       </DndProvider>
     </div>
